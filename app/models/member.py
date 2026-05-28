@@ -20,7 +20,7 @@ class MemberStatus(str, enum.Enum):
     deceased = 'deceased'
 
 
-class Members(Base):
+class Member(Base):
     __tablename__ = 'members'
 
     id: Mapped[uuid.UUID] = mapped_column(
