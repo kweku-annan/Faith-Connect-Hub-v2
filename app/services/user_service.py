@@ -54,7 +54,7 @@ def _decode_invite_token(token: str) -> dict:
             raise BadRequestException(detail="Invalid invite token")
         return payload
     except JWTError:
-        raise BadRequestException(detail="Invalid token is invalid or has expired")
+        raise BadRequestException(detail="Invalid token or token has expired")
 
 
 async def _get_user_with_roles(db: AsyncSession, user_id: uuid.UUID) -> User | None:
@@ -97,7 +97,7 @@ async def login(db: AsyncSession, data: LoginRequest) -> tuple[User, str, str]:
     if not user or not password_ok:
         raise UnauthorizedException(detail="Incorrect email or password")
     if not user.is_active:
-        raise UnauthorizedException(detail="User account is deactivated. Contact an adminstrator")
+        raise UnauthorizedException(detail="User account is deactivated. Contact an administrator")
 
     # Update last login timestamp
     user.last_login = datetime.utcnow()
