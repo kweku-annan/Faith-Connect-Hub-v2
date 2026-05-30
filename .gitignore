@@ -24,4 +24,4 @@ alembic/versions/*.pyc
 alembic/versions/*.pyo
 alembic/versions/__pycache__/
 alembic/versions/*.py
-
+!alembic/versions/.gitkeep
