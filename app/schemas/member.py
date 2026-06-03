@@ -120,10 +120,3 @@ class MemberSummary(BaseModel):
 
     model_config = {"from_attributes": True}
 
-
-
-
-
-
-
-
