@@ -86,7 +86,7 @@ class GroupMembership(Base):
 
     # Relationships
     group: Mapped["Group"] = relationship("Group", back_populates="memberships")
-    members: Mapped["Member"] = relationship(  # noqa: F821
+    member: Mapped["Member"] = relationship(  # noqa: F821
         "Member", back_populates="group_membership"
     )
 
