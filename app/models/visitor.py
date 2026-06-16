@@ -15,7 +15,7 @@ class Visitor(Base):
     email: Mapped[str | None] = mapped_column(String(255), unique=True, nullable=True)
     phone: Mapped[str | None] = mapped_column(String(15), nullable=True)
     date_of_visit: Mapped[Date] = mapped_column(Date, nullable=False)
-    invited_by_member_id: Mapped[uuid.UUID] = mapped_column(
+    invited_by_member_id: Mapped[uuid.UUID | None] = mapped_column(
         UUID(as_uuid=True), ForeignKey("members.id", ondelete="SET NULL"), nullable=True
     )
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
