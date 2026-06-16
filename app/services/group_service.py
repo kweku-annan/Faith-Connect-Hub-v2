@@ -338,7 +338,6 @@ async def assign_leader(
     Rules enforced:
     - Only admins can assign leaders
     - The user must already be a member of this group
-    - A user can only lead one group
     - If is_primary=True, any existing primary leader is demoted first
     """
     if not _can_create_group(assigned_by):
@@ -384,7 +383,7 @@ async def assign_leader(
     if existing:
         if existing.group_id == group_id:
             raise ConflictException("This user is already a leader of this group")
-        raise ConflictException("This user already leads another group")
+        # raise ConflictException("This user already leads another group")
 
     # Demote existing primary leader if assigning a new one
     if data.is_primary:
@@ -481,7 +480,7 @@ async def assign_member(
     """
     Assign an existing church member to a group.
     Only super_admin, admin, and pastor can do this.
-    The member must not already belong to another group.
+
     """
     if not _can_assign_members(assigned_by):
         raise ForbiddenException("Only admins and pastors can assign members to groups")
@@ -515,9 +514,9 @@ async def assign_member(
     if existing:
         if existing.group_id == group_id:
             raise ConflictException("This member is already in this group")
-        raise ConflictException(
-            "This member already belongs to another group. Use the transfer endpoint instead."
-        )
+        # raise ConflictException(
+        #     "This member already belongs to another group. Use the transfer endpoint instead."
+        # )
 
     new_membership = GroupMembership(
         group_id=group_id,
